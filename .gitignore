@@ -1,0 +1,35 @@
+# Environment variables
+.env
+
+# Generated images
+images/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Coverage directory
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Local development
+*.local
