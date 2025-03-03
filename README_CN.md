@@ -132,12 +132,12 @@ docker build -t mcp/image-gen .
 | `prompt`           | string  | 是     | -       | 图像生成的文本提示                          |
 | `output_dir`       | string  | 是     | -       | 保存生成图像的服务器目录路径                |
 | `go_fast`          | boolean | 否     | false   | 启用更快的生成模式                          |
-| `megapixels`       | string  | 否     | "1"     | 分辨率质量（"1"、"2"、"4"）                |
+| `megapixels`       | string  | 否     | "1"     | 分辨率质量："1"（1024x1024，约100万像素），"0.25"（512x512，约25万像素）|
 | `num_outputs`      | number  | 否     | 1       | 要生成的图像数量（1-4）                     |
 | `aspect_ratio`     | string  | 否     | "1:1"   | 宽高比（"1:1"、"4:3"、"16:9"）             |
 | `output_format`    | string  | 否     | "webp"  | 图像格式（"webp"、"png"、"jpeg"）          |
 | `output_quality`   | number  | 否     | 80      | 压缩质量（1-100）                          |
-| `num_inference_steps`| number| 否     | 4       | 去噪步骤数（4-20）                         |
+| `num_inference_steps`| number| 否     | 4       | 去噪步骤数（4-20），步数越多质量越高但速度越慢 |
 | `return_image_data`| boolean | 否     | false   | 在响应中返回Base64编码的图像数据           |
 | `use_relative_path`| boolean | 否     | false   | 使用相对于映射主机目录的路径               |
 | `filename`         | string  | 否     | 自动    | 保存图像的基本文件名                       |

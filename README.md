@@ -132,12 +132,12 @@ To use with cursor:
 | `prompt`           | string  | Yes      | -       | Text prompt for image generation               |
 | `output_dir`       | string  | Yes      | -       | Server directory path to save generated images |
 | `go_fast`          | boolean | No       | false   | Enable faster generation mode                  |
-| `megapixels`       | string  | No       | "1"     | Resolution quality ("1", "2", "4")            |
+| `megapixels`       | string  | No       | "1"     | Resolution quality: "1" (1024x1024, ~1M pixels), "0.25" (512x512, ~250K pixels) |
 | `num_outputs`      | number  | No       | 1       | Number of images to generate (1-4)            |
 | `aspect_ratio`     | string  | No       | "1:1"   | Aspect ratio ("1:1", "4:3", "16:9")          |
 | `output_format`    | string  | No       | "webp"  | Image format ("webp", "png", "jpeg")         |
 | `output_quality`   | number  | No       | 80      | Compression quality (1-100)                   |
-| `num_inference_steps`| number| No       | 4       | Number of denoising steps (4-20)             |
+| `num_inference_steps`| number| No       | 4       | Number of denoising steps (4-20), higher values increase quality but slow down generation |
 | `return_image_data`| boolean | No       | false   | Return Base64 encoded image data in response |
 | `use_relative_path`| boolean | No       | false   | Use paths relative to mapped host directory  |
 | `filename`         | string  | No       | auto    | Base filename for saved images               |
