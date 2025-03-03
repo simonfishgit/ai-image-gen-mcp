@@ -56,8 +56,6 @@ docker build -t mcp/image-gen .
 
 Add this to your `claude_desktop_config.json`:
 
-#### Docker
-
 ```json
 {
   "mcpServers": {
@@ -72,25 +70,6 @@ Add this to your `claude_desktop_config.json`:
         "-v",
         "/path/to/host/directory:/app/host_data",
         "mcp/image-gen"
-      ],
-      "env": {
-        "REPLICATE_API_TOKEN": "YOUR_API_TOKEN_HERE"
-      }
-    }
-  }
-}
-```
-
-#### NPX
-
-```json
-{
-  "mcpServers": {
-    "image-gen": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-image-gen"
       ],
       "env": {
         "REPLICATE_API_TOKEN": "YOUR_API_TOKEN_HERE"

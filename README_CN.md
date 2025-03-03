@@ -56,8 +56,6 @@ docker build -t mcp/image-gen .
 
 将以下配置添加到您的`claude_desktop_config.json`文件中：
 
-#### Docker方式
-
 ```json
 {
   "mcpServers": {
@@ -72,25 +70,6 @@ docker build -t mcp/image-gen .
         "-v",
         "/path/to/host/directory:/app/host_data",
         "mcp/image-gen"
-      ],
-      "env": {
-        "REPLICATE_API_TOKEN": "您的API令牌"
-      }
-    }
-  }
-}
-```
-
-#### NPX方式
-
-```json
-{
-  "mcpServers": {
-    "image-gen": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-image-gen"
       ],
       "env": {
         "REPLICATE_API_TOKEN": "您的API令牌"
