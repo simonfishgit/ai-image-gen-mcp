@@ -41,41 +41,41 @@ Ideally to be used with Cursor's MCP feature, but can be used with any MCP clien
    npm run build
    ```
 
-## Docker 使用说明
+## Docker Usage
 
-本项目提供了Docker支持，可以通过Docker容器运行图像生成服务。
+This project provides Docker support, allowing you to run the image generation service in a Docker container.
 
-### 构建Docker镜像
+### Building the Docker Image
 
 ```bash
-# 在项目根目录下执行
+# Execute in the project root directory
 docker build -t mcp/image-gen .
 ```
 
-### 运行Docker容器
+### Running the Docker Container
 
 ```bash
-# 基本用法
+# Basic usage
 docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
 
-# Windows环境示例
+# Windows environment example
 docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v F:\work2025:/app/host_data mcp/image-gen
 
-# 指定容器名称
+# Specifying a container name
 docker run --name my-image-generator --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
 ```
 
-### 参数说明
+### Parameter Description
 
-- `--rm`: 容器停止后自动删除
-- `-i`: 保持STDIN开启，允许交互式会话
-- `-e REPLICATE_API_TOKEN=your-token-here`: 设置Replicate API令牌
-- `-v /path/to/host/directory:/app/host_data`: 挂载主机目录到容器内的`/app/host_data`目录
-- `--name my-image-generator`: 为容器指定一个名称（可选）
+- `--rm`: Automatically remove the container when it stops
+- `-i`: Keep STDIN open, allowing interactive sessions
+- `-e REPLICATE_API_TOKEN=your-token-here`: Set the Replicate API token
+- `-v /path/to/host/directory:/app/host_data`: Mount the host directory to the `/app/host_data` directory in the container
+- `--name my-image-generator`: Specify a name for the container (optional)
 
-### 使用相对路径保存图像
+### Using Relative Paths to Save Images
 
-当使用Docker容器时，建议使用相对路径来保存图像。在API请求中设置：
+When using Docker containers, it's recommended to use relative paths to save images. In the API request, set:
 
 ```json
 {
@@ -86,7 +86,7 @@ docker run --name my-image-generator --rm -i -e REPLICATE_API_TOKEN=your-token-h
 }
 ```
 
-这样图像将保存在挂载目录下的`images`文件夹中（例如：`/path/to/host/directory/images/`）。
+This way, images will be saved in the `images` folder under the mounted directory (e.g., `/path/to/host/directory/images/`).
 
 ## Usage
 
@@ -122,7 +122,7 @@ To use with cursor:
   "prompt": "black forest gateau cake spelling out 'FLUX SCHNELL'",
   "output_dir": "/var/output/images",
   "filename": "black_forest_cake",
-  "output_format": "webp"
+  "output_format": "webp",
   "go_fast": true,
   "megapixels": "1",
   "num_outputs": 2,
@@ -145,9 +145,9 @@ To use with cursor:
 }
 ```
 
-### 带有Base64图像数据的响应示例
+### Response Example with Base64 Image Data
 
-当设置`return_image_data: true`时，响应将包含Base64编码的图像数据：
+When setting `return_image_data: true`, the response will include Base64 encoded image data:
 
 ```json
 {
