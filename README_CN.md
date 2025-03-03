@@ -52,26 +52,53 @@
 docker build -t mcp/image-gen .
 ```
 
-### 运行Docker容器
+### 在Claude Desktop中使用
 
-```bash
-# 基本用法
-docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+将以下配置添加到您的`claude_desktop_config.json`文件中：
 
-# Windows环境示例
-docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v F:\work2025:/app/host_data mcp/image-gen
+#### Docker方式
 
-# 指定容器名称
-docker run --name my-image-generator --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+```json
+{
+  "mcpServers": {
+    "image-gen": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "REPLICATE_API_TOKEN",
+        "-v",
+        "/path/to/host/directory:/app/host_data",
+        "mcp/image-gen"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "您的API令牌"
+      }
+    }
+  }
+}
 ```
 
-### 参数说明
+#### NPX方式
 
-- `--rm`: 容器停止后自动删除
-- `-i`: 保持STDIN开启，允许交互式会话
-- `-e REPLICATE_API_TOKEN=your-token-here`: 设置Replicate API令牌
-- `-v /path/to/host/directory:/app/host_data`: 挂载主机目录到容器内的`/app/host_data`目录
-- `--name my-image-generator`: 为容器指定一个名称（可选）
+```json
+{
+  "mcpServers": {
+    "image-gen": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-image-gen"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "您的API令牌"
+      }
+    }
+  }
+}
+```
 
 ### 使用相对路径保存图像
 

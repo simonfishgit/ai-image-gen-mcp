@@ -52,26 +52,53 @@ This project provides Docker support, allowing you to run the image generation s
 docker build -t mcp/image-gen .
 ```
 
-### Running the Docker Container
+### Usage with Claude Desktop
 
-```bash
-# Basic usage
-docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+Add this to your `claude_desktop_config.json`:
 
-# Windows environment example
-docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v F:\work2025:/app/host_data mcp/image-gen
+#### Docker
 
-# Specifying a container name
-docker run --name my-image-generator --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+```json
+{
+  "mcpServers": {
+    "image-gen": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "REPLICATE_API_TOKEN",
+        "-v",
+        "/path/to/host/directory:/app/host_data",
+        "mcp/image-gen"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
 ```
 
-### Parameter Description
+#### NPX
 
-- `--rm`: Automatically remove the container when it stops
-- `-i`: Keep STDIN open, allowing interactive sessions
-- `-e REPLICATE_API_TOKEN=your-token-here`: Set the Replicate API token
-- `-v /path/to/host/directory:/app/host_data`: Mount the host directory to the `/app/host_data` directory in the container
-- `--name my-image-generator`: Specify a name for the container (optional)
+```json
+{
+  "mcpServers": {
+    "image-gen": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-image-gen"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "YOUR_API_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
 
 ### Using Relative Paths to Save Images
 
