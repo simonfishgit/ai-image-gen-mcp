@@ -102,7 +102,7 @@ docker build -t mcp/image-gen .
 3. 向下滚动到"MCP服务器"
 4. 点击"添加新的MCP服务器"
 5. 将类型设置为"命令"
-6. 设置命令为：`node ./path/to/dist/server.js`
+6. 设置命令为：`docker run --rm -i -e REPLICATE_API_TOKEN=您的API令牌 -v /path/to/host/directory:/app/host_data mcp/image-gen`
 
 ## API参数
 

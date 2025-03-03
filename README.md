@@ -102,7 +102,7 @@ To use with cursor:
 3. Scroll down to "MCP Servers"
 4. Click "Add new MCP Server"
 5. Set Type to "Command"
-6. Set Command to: `node ./path/to/dist/server.js`
+6. Set Command to: `docker run --rm -i -e REPLICATE_API_TOKEN=YOUR_API_TOKEN_HERE -v /path/to/host/directory:/app/host_data mcp/image-gen`
 
 ## API Parameters
 
