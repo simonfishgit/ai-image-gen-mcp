@@ -41,6 +41,53 @@ Ideally to be used with Cursor's MCP feature, but can be used with any MCP clien
    npm run build
    ```
 
+## Docker 使用说明
+
+本项目提供了Docker支持，可以通过Docker容器运行图像生成服务。
+
+### 构建Docker镜像
+
+```bash
+# 在项目根目录下执行
+docker build -t mcp/image-gen .
+```
+
+### 运行Docker容器
+
+```bash
+# 基本用法
+docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+
+# Windows环境示例
+docker run --rm -i -e REPLICATE_API_TOKEN=your-token-here -v F:\work2025:/app/host_data mcp/image-gen
+
+# 指定容器名称
+docker run --name my-image-generator --rm -i -e REPLICATE_API_TOKEN=your-token-here -v /path/to/host/directory:/app/host_data mcp/image-gen
+```
+
+### 参数说明
+
+- `--rm`: 容器停止后自动删除
+- `-i`: 保持STDIN开启，允许交互式会话
+- `-e REPLICATE_API_TOKEN=your-token-here`: 设置Replicate API令牌
+- `-v /path/to/host/directory:/app/host_data`: 挂载主机目录到容器内的`/app/host_data`目录
+- `--name my-image-generator`: 为容器指定一个名称（可选）
+
+### 使用相对路径保存图像
+
+当使用Docker容器时，建议使用相对路径来保存图像。在API请求中设置：
+
+```json
+{
+  "prompt": "your prompt here",
+  "output_dir": "images",
+  "use_relative_path": true,
+  ...
+}
+```
+
+这样图像将保存在挂载目录下的`images`文件夹中（例如：`/path/to/host/directory/images/`）。
+
 ## Usage
 
 To use with cursor:
@@ -64,6 +111,9 @@ To use with cursor:
 | `output_format`    | string  | No       | "webp"  | Image format ("webp", "png", "jpeg")         |
 | `output_quality`   | number  | No       | 80      | Compression quality (1-100)                   |
 | `num_inference_steps`| number| No       | 4       | Number of denoising steps (4-20)             |
+| `return_image_data`| boolean | No       | false   | Return Base64 encoded image data in response |
+| `use_relative_path`| boolean | No       | false   | Use paths relative to mapped host directory  |
+| `filename`         | string  | No       | auto    | Base filename for saved images               |
 
 ## Example Request
 
@@ -87,6 +137,27 @@ To use with cursor:
   "image_paths": [
     "/var/output/images/output_0.webp",
     "/var/output/images/output_1.webp"
+  ],
+  "metadata": {
+    "model": "black-forest-labs/flux-schnell",
+    "inference_time_ms": 2847
+  }
+}
+```
+
+### 带有Base64图像数据的响应示例
+
+当设置`return_image_data: true`时，响应将包含Base64编码的图像数据：
+
+```json
+{
+  "image_paths": [
+    "/var/output/images/output_0.webp",
+    "/var/output/images/output_1.webp"
+  ],
+  "image_data": [
+    "data:image/webp;base64,UklGRtYAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSBIAAAABF...",
+    "data:image/webp;base64,UklGRtYAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSBIAAAABF..."
   ],
   "metadata": {
     "model": "black-forest-labs/flux-schnell",
